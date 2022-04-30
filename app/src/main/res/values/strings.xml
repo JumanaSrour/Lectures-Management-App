@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Schoolie</string>
+    <string name="courses">Courses</string>
+    <string name="favorites">Favorites</string>
+    <string name="home">Home</string>
+    <string name="assignments">Assignments</string>
+
+
+    <string name="slogan">where you can easily keep your studies on track</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

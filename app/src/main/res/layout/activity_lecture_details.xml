@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LectureDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleGravity="top"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="top"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_lec_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="275dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="start"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/elearning" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:theme="@style/status_bar_transparent"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:layout_collapseMode="pin"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/ib_cancel"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize"
+                        android:layout_alignParentStart="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_remove" />
+
+                    <ImageButton
+                        android:id="@+id/ib_share"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize"
+                        android:layout_toStartOf="@id/ib_favorite"
+                        android:src="@drawable/ic_share" />
+
+                    <ImageButton
+                        android:id="@+id/ib_favorite"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_favorites" />
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="60dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_icon"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tv_lec_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Data Analysis with R"
+                android:textColor="@color/black"
+                android:theme="@style/TextViewStyle"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/TextViewStyle" />
+
+            <TextView
+                android:id="@+id/tv_lec_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:text="This course is about .."
+                android:textSize="14sp"
+                android:theme="@style/TextViewStyle" />
+
+            <TextView
+                android:id="@+id/tv_lecturer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:text="Lecturer Name"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:theme="@style/TextViewStyle" />
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/exoplayerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:animateLayoutChanges="true"
+                android:background="@color/light_color"
+                app:shutter_background_color="@color/main_color"
+                app:use_controller="false">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+            </com.google.android.exoplayer2.ui.PlayerView>
+
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/pdfView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/sfuitext_regular"
+                android:background="@drawable/btn_regular"
+                app:backgroundTint="@null"
+                android:text="Done"
+                android:textAlignment="center"
+                android:layout_marginTop="100dp"
+                android:textAllCaps="false"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/lec_courses"
+        android:visible="true"
+        android:icon="@drawable/ic_courses"
+        tools:ignore="MenuTitle" />
+
+    <item android:id="@+id/lec_assignments"
+        android:visible="true"
+        android:icon="@drawable/ic_assignment"
+        tools:ignore="MenuTitle" />
+
+    <item android:id="@+id/lec_chat"
+        android:visible="true"
+        android:icon="@drawable/ic_chat"
+        tools:ignore="MenuTitle" />
+
+</menu>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/corner_dialog"
+    android:background="@drawable/layout_rounded">
+
+    <TextView
+        android:id="@+id/tv_alert_title"
+        android:layout_width="match_parent"
+        android:text="Add Course"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:layout_marginHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        style="@style/TextViewStyle"/>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_add_course"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/montserrat"
+            android:background="@drawable/btn_regular"
+            android:gravity="center"
+            android:text="Add the Course"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btn_cancel_course"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@drawable/btn_regular"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Cancel the Course"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:backgroundTint="@null" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    android:orientation="vertical"
+    tools:context=".activities.lecturer.LecturerProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <ImageButton
+                android:id="@+id/lec_back_profile"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_white"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/tv_my_profile"
+                style="@style/TextViewStyle"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="150dp"
+                android:text="My Profile"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_main_shape"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingTop="30dp">
+
+
+        <ImageView
+            android:id="@+id/iv_lec_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit_profile_icon" />
+
+        <TextView
+            android:id="@+id/tv_lec_name"
+            style="@style/TextViewStyle"
+            android:paddingTop="15sp"
+            android:textStyle="normal"
+            android:text="name"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_lec_email"
+            style="@style/TextViewStyle"
+            android:paddingTop="5dp"
+            android:text="name@gmail.com"
+            android:textSize="16sp"
+            android:textColor="@color/bold_grey_txt" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="27dp"
+                android:src="@drawable/shape_edit" />
+
+            <Button
+                android:id="@+id/btn_lec_edit_profile"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/shape_next"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="10dp"
+                android:text="Edit profile"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="27dp"
+                android:src="@drawable/shape_lock" />
+
+            <Button
+                android:id="@+id/btn_lec_change_password"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/shape_next"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="10dp"
+                android:text="Change password"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            tools:ignore="NestedWeights">
+            <TextView
+                android:id="@+id/tv_lec_logout"
+                style="@style/TextViewStyle"
+                android:layout_marginBottom="52dp"
+                android:padding="10dp"
+                android:text="Log out"
+                android:textColor="@color/main_color"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
