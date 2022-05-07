@@ -160,9 +160,12 @@
                     android:visibility="invisible" />
             </com.google.android.exoplayer2.ui.PlayerView>
 
-            <com.github.barteksc.pdfviewer.PDFView
+            <ImageView
                 android:id="@+id/pdfView"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/img"
+                android:padding="10dp"
                 android:layout_height="100dp"/>
 
             <Button

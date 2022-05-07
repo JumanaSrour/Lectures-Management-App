@@ -2,6 +2,7 @@ package com.example.schoolie.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.schoolie.R
 import com.example.schoolie.models.Course
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.course_item.view.*
 
 class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
     RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
     private var listener: SetClickListener? = null
+    private lateinit var analytics: FirebaseAnalytics
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var courseImage: ImageView = itemView.course_image
@@ -34,6 +37,8 @@ class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        analytics = FirebaseAnalytics.getInstance(context)
+        val bundle = Bundle()
         holder.courseName.text = data[position].course_name
         holder.courseInstructor.text = data[position].course_instructor
         Glide.with(context).load(data[position].course_image).into(holder.courseImage)
@@ -46,6 +51,9 @@ class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
         holder.courseCard.setOnClickListener {
             Log.d("TAG", "onBindViewHolder: clicked")
             listener?.onItemClickListener(position, data[position])
+            listener?.onItemClickListener(position, data[position])
+            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, data[position].course_name)
+            analytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle)
         }
         Glide.with(context).load(data[position].course_image).circleCrop().into(holder.courseImage)
     }

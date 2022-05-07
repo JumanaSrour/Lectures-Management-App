@@ -105,7 +105,7 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
                     val uid = SavedPreferences.user_id
                     if (uid != null) {
                         coursesCollectionRef.get()
-                            // pass value from course to dialog to get course key
+                            // disable add course btn when ore than 5 courses are registered
                             .addOnCompleteListener {
                                 val param = ArrayMap<String, Any>()
                                 param["student_ids"] = FieldValue.arrayUnion(uid)

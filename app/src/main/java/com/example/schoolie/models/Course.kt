@@ -7,5 +7,5 @@ data class Course(
     var course_desc: String = "",
     var course_image: String? = "",
     var course_key: String = "",
-    var student_ids: String = ""
+    var student_ids: ArrayList<String>? = null
 )
