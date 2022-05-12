@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.example.schoolie.R
 import com.example.schoolie.activities.CourseDetailsActivity
 import com.example.schoolie.adapters.CoursesAdapter
+import com.example.schoolie.manager.FcmNotificationBuilder
 import com.example.schoolie.models.Course
 import com.example.schoolie.models.CustomAddCourseDialog
 import com.example.schoolie.utilities.SavedPreferences
@@ -23,10 +24,13 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.course_item.*
 import kotlinx.android.synthetic.main.course_item.view.*
+import kotlinx.android.synthetic.main.fragment_home_student.*
 import kotlinx.android.synthetic.main.fragment_student_courses.*
 import kotlinx.android.synthetic.main.fragment_student_courses.view.*
 
@@ -39,19 +43,34 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
     private lateinit var courseInstructor: String
     private val coursesCollectionRef = Firebase.firestore.collection("courses")
 
+    private var myCourseCount = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_student_courses, container, false)
         return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retrieveCourses()
+        getCount()
+    }
+
+    private fun getCount() {
+        val uid = SavedPreferences.user_id
+        coursesCollectionRef.whereArrayContains("student_ids", uid as Any).get()
+            .addOnCompleteListener {
+
+                myCourseCount = it.result.documents.count()
+
+                retrieveCourses()
+            }
+            .addOnFailureListener { exception ->
+                Log.d("---", "get failed with ", exception)
+            }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -67,11 +86,12 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
                         course_key = obj!!.course_key
                         array.add(obj)
                     }
-                    Log.d("documents", "$array")
+                    Log.d("myCourseCount", "$myCourseCount")
 
-                    coursesAdapter = CoursesAdapter(requireContext(), array)
+                    coursesAdapter = CoursesAdapter(requireContext(), myCourseCount, array)
                     coursesAdapter.setListener(this)
                     rv_courses_std.adapter = coursesAdapter
+
                     coursesAdapter.notifyDataSetChanged()
                 }
                 .addOnFailureListener { exception ->
@@ -88,7 +108,6 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
     }
 
     override fun onButtonClickListener(position: Int, course: Course) {
-//        course_key = requireActivity().intent.extras?.getString("course_key").toString()
         createAddCourseDialog()
     }
 
@@ -105,13 +124,14 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
                     val uid = SavedPreferences.user_id
                     if (uid != null) {
                         coursesCollectionRef.get()
-                            // disable add course btn when ore than 5 courses are registered
+                            // disable add course btn when are than 5 courses are registered
                             .addOnCompleteListener {
                                 val param = ArrayMap<String, Any>()
                                 param["student_ids"] = FieldValue.arrayUnion(uid)
                                 coursesCollectionRef.document(course_key).set(param, SetOptions.merge())
                             }
                     }
+                    sendNotification()
                     Toast.makeText(requireContext(), "Course Successfully Added", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT).show()
@@ -122,6 +142,26 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
                 dialog.dismiss()
             }
         })
+    }
+
+    private fun sendNotification() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Log.w("TAG", "getInstanceId failed", it.exception)
+                return@addOnCompleteListener
+            }
+            val token = it.result.toString()
+            val msg = token
+            Log.d("TAG", msg)
+            FcmNotificationBuilder()
+                .type("TYPE_CHAT")
+                .title("Course Registration")
+                .message("Course successfully registered")
+                .uid(SavedPreferences.user_id)
+                .firebaseToken(token)
+                .receiverFirebaseToken(token)
+                .send()
+        }
     }
 
     override fun onStart() {

@@ -31,6 +31,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_student_courses.*
 
@@ -50,6 +51,7 @@ class HomeStudentActivity : AppCompatActivity(), CoursesAdapter.SetClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         analytics = FirebaseAnalytics.getInstance(this)
         showAds()
         initProperties()
@@ -173,7 +175,6 @@ class HomeStudentActivity : AppCompatActivity(), CoursesAdapter.SetClickListener
             }
 
             override fun afterTextChanged(p0: Editable?) {
-//                initProperties()
                 val uid = SavedPreferences.user_id
                 if (uid != "" /*&& sv_search_std.text.toString().isNotEmpty()*/) {
                     Log.e("search", "setEventsListener: ${sv_search_std.text}")
@@ -204,7 +205,7 @@ class HomeStudentActivity : AppCompatActivity(), CoursesAdapter.SetClickListener
             }
 
             private fun setDataInAdapter(newArray: ArrayList<Course>) {
-                coursesAdapter = CoursesAdapter(this@HomeStudentActivity, newArray)
+                coursesAdapter = CoursesAdapter(this@HomeStudentActivity, null, newArray)
                 coursesAdapter.setListener(this@HomeStudentActivity)
                 rv_courses_std.adapter = coursesAdapter
                 coursesAdapter.notifyDataSetChanged()

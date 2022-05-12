@@ -18,8 +18,9 @@ import com.example.schoolie.models.Course
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.course_item.view.*
 
-class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
+class CoursesAdapter(val context: Context,var count: Int? = null, val data: ArrayList<Course>) :
     RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
+
     private var listener: SetClickListener? = null
     private lateinit var analytics: FirebaseAnalytics
 
@@ -39,15 +40,24 @@ class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         analytics = FirebaseAnalytics.getInstance(context)
         val bundle = Bundle()
+
+        if (count != null) {
+            if (count!! >= 5) {
+                holder.btnAdd.isEnabled = false
+            }
+        }
+
         holder.courseName.text = data[position].course_name
         holder.courseInstructor.text = data[position].course_instructor
         Glide.with(context).load(data[position].course_image).into(holder.courseImage)
+
         holder.btnAdd.setOnClickListener {
             listener?.onButtonClickListener(
                 position,
                 data[position]
             )
         }
+
         holder.courseCard.setOnClickListener {
             Log.d("TAG", "onBindViewHolder: clicked")
             listener?.onItemClickListener(position, data[position])
@@ -55,6 +65,7 @@ class CoursesAdapter(val context: Context, val data: ArrayList<Course>) :
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, data[position].course_name)
             analytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle)
         }
+
         Glide.with(context).load(data[position].course_image).circleCrop().into(holder.courseImage)
     }
 

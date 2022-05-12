@@ -4,10 +4,18 @@
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
     <string name="assignments">Assignments</string>
-    <string name="banner_ad_unit_id">ca-app-pub-2196207525988281/2124944156</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/2934735716</string>
 
 
     <string name="slogan">where you can easily keep your studies on track</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delay">Delay in seconds</string>
+    <string name="delivery_priority">Delivery priority</string>
+    <string name="delivery_priority_hint">By default, messages are sent with normal priority. This optimizes the client app\'s battery consumption (Doze). There may be a short delay in receiving the notification. With high priority the notification can wake a sleeping device and is received immediately.</string>
+
+    <string name="notification_priority">Notification priority</string>
+    <string name="notification_priority_hint">Indication of how much of the user\'s valuable attention should be consumed by this notification. Low-priority notifications may be hidden from the user in certain situations, while the user might be interrupted for a higher-priority notification. The system sets a notification\'s priority based on various factors including the setPriority value. The effect may differ slightly on different platforms.</string>
+    <string name="notification_channel_hint">The notification channel has already been created. The priority can only be changed in the Application Info Notification Settings</string>
+    <string name="token_prefix">token_prefix</string>
 </resources>

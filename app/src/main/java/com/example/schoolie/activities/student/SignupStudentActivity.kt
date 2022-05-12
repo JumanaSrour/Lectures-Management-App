@@ -10,6 +10,7 @@ import com.example.schoolie.activities.HomeStudentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_signup_student.*
 
 class SignupStudentActivity : AppCompatActivity() {

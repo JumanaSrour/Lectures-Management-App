@@ -11,7 +11,7 @@
         android:id="@+id/rv_home_std"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/registered_course_item"
+        tools:listitem="@layout/course_item"
         android:orientation="vertical"
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
