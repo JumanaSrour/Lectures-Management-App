@@ -37,9 +37,6 @@ class StorageUtil {
                 it.metadata!!.reference!!.downloadUrl.addOnCompleteListener {
                     onSuccess(it.result.toString())
                 }
-//                onSuccess(it.task.getResult().toString())
-
-            //                onSuccess(ref.downloadUrl.toString())
             }
     }
 

@@ -25,7 +25,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.course_item.*
@@ -108,10 +107,10 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
     }
 
     override fun onButtonClickListener(position: Int, course: Course) {
-        createAddCourseDialog()
+        createAddCourseDialog(course.course_key)
     }
 
-    private fun createAddCourseDialog() {
+    private fun createAddCourseDialog(key: String) {
         val dialog = CustomAddCourseDialog().newInstance(
             "Add Course",
             "Add Course",
@@ -121,14 +120,18 @@ class StudentCoursesFragment : Fragment(), CoursesAdapter.SetClickListener {
         dialog.onClickListener(object : CustomAddCourseDialog.CustomDialogListener {
             override fun onDialogPositiveClick(str: String) {
                 try {
+
                     val uid = SavedPreferences.user_id
+                    Log.e("-- UserId", "onDialogPositiveClick: $uid")
+                    Log.e("-- CourseKey", "onDialogPositiveClick: $key")
+
                     if (uid != null) {
                         coursesCollectionRef.get()
                             // disable add course btn when are than 5 courses are registered
                             .addOnCompleteListener {
                                 val param = ArrayMap<String, Any>()
                                 param["student_ids"] = FieldValue.arrayUnion(uid)
-                                coursesCollectionRef.document(course_key).set(param, SetOptions.merge())
+                                coursesCollectionRef.document(key).set(param, SetOptions.merge())
                             }
                     }
                     sendNotification()

@@ -31,7 +31,6 @@ class ViewAssignmentActivity : AppCompatActivity() {
         webView.settings.setSupportZoom(true)
         webView.settings.javaScriptEnabled = true
 
-
         var url = ""
         val pdf = fileUrl
 
@@ -41,7 +40,6 @@ class ViewAssignmentActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         webView.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=$url")
-
     }
 
     private class Callback : WebViewClient() {
